@@ -8,8 +8,6 @@ DisplayResults(foodType, ingredient, seasoning);
 
 Type GetFoodType()
 {
-    int foodChoice;
-
     Console.Write("""
                   Make a selection for the Food Type:
                   1. Soup
@@ -18,10 +16,8 @@ Type GetFoodType()
 
                   Selection: 
                   """);
-    do
-    {
-        foodChoice = UserInput();
-    } while (foodChoice < 1 || foodChoice > 3);
+
+    int foodChoice = UserInput(1, 3);
 
     return foodChoice switch
     {
@@ -33,8 +29,6 @@ Type GetFoodType()
 
 MainIngredient GetIngredient()
 {
-    int ingredientChoice;
-
     Console.Clear();
     Console.Write("""
                   Make a selection for the Ingredient Type:
@@ -45,10 +39,8 @@ MainIngredient GetIngredient()
 
                   Selection:
                   """);
-    do
-    {
-        ingredientChoice = UserInput();
-    } while (ingredientChoice < 1 || ingredientChoice > 4);
+    
+    int ingredientChoice = UserInput(1, 4);
 
     return ingredientChoice switch
     {
@@ -61,8 +53,6 @@ MainIngredient GetIngredient()
 
 Seasoning GetSeasoning()
 {
-    int seasoningChoice;
-
     Console.Clear();
     Console.Write("""
                   Make a selection for the Season Type:
@@ -72,10 +62,8 @@ Seasoning GetSeasoning()
 
                   Selection:
                   """);
-    do
-    {
-        seasoningChoice = UserInput();
-    } while (seasoningChoice < 1 || seasoningChoice > 3);
+    
+    int seasoningChoice = UserInput(1, 3);
 
     return seasoningChoice switch
     {
@@ -93,9 +81,16 @@ void DisplayResults(Type foodChoice, MainIngredient ingredientChoice, Seasoning 
     Console.Write($"Today's menu is {results.Seasoning} {results.Ingredient} {results.FoodType}");
 }
 
-int UserInput()
+int UserInput(int firstChoice, int lastChoice)
 {
-    return Convert.ToInt32(Console.ReadLine());
+    int validResponce = 0;
+
+    do
+    {
+        validResponce = Convert.ToInt32(Console.ReadLine());        
+    }while (validResponce < firstChoice || validResponce > lastChoice);
+
+    return validResponce;
 }
 
 enum Type
